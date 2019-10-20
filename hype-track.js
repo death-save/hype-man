@@ -1,13 +1,13 @@
-class HypeMan {
+class HypeTrack {
     constructor() {
         this.playlist = null;
     }
 
     async init() {
         Hooks.on("ready", async () => {
-            const hypePlaylist = game.playlists.entities.find(p => p.name == HypeMan.DEFAULT_CONFIG.playlistName);
+            const hypePlaylist = game.playlists.entities.find(p => p.name == HypeTrack.DEFAULT_CONFIG.playlistName);
             if(!hypePlaylist) {
-                this.playlist = await Playlist.create({"name": HypeMan.DEFAULT_CONFIG.playlistName});
+                this.playlist = await Playlist.create({"name": HypeTrack.DEFAULT_CONFIG.playlistName});
             } else {
                 this.playlist = hypePlaylist;
             }
@@ -16,14 +16,14 @@ class HypeMan {
         });
 
         Hooks.on("updateCombat", (combat, update) => {
-            const actorTrack = combat.combatant.actor.getFlag(HypeMan.DEFAULT_CONFIG.moduleName, HypeMan.DEFAULT_CONFIG.flagNames.track);
 
             if(update.turn || update.round) {
+                const actorTrack = combat.combatant.actor.getFlag(HypeTrack.DEFAULT_CONFIG.moduleName, HypeTrack.DEFAULT_CONFIG.flagNames.track);
+
                 this.playlist.stopAll();
 
                 if(actorTrack) {
                     this._playTrack(actorTrack);
-                    //this.playlist.playAll();
                 }
             }
         });
@@ -47,7 +47,7 @@ class HypeMan {
 
     static get DEFAULT_CONFIG() {
         return {
-            moduleName: "hype-man",
+            moduleName: "hype-track",
             playlistName: "Hype Tracks",
             buttonIcon: "fas fa-music",
             buttonText: " Hype",
@@ -67,7 +67,7 @@ class HypeMan {
         let actorTrack;
 
         try {
-            actorTrack = await actor.getFlag(HypeMan.DEFAULT_CONFIG.moduleName, HypeMan.DEFAULT_CONFIG.flagNames.track);
+            actorTrack = await actor.getFlag(HypeTrack.DEFAULT_CONFIG.moduleName, HypeTrack.DEFAULT_CONFIG.flagNames.track);
             return actorTrack;
         } catch (e) {
             console.log(e);
@@ -88,9 +88,9 @@ class HypeMan {
          * jquery reference to the D&D Beyond button to add to the sheet
          */
         const hypeButton = $(
-            `<a class="${HypeMan.DEFAULT_CONFIG.moduleName}" title="${HypeMan.DEFAULT_CONFIG.aTitle}">
-                <i class="${HypeMan.DEFAULT_CONFIG.buttonIcon}"></i>
-                <span> ${HypeMan.DEFAULT_CONFIG.buttonText}</span>
+            `<a class="${HypeTrack.DEFAULT_CONFIG.moduleName}" title="${HypeTrack.DEFAULT_CONFIG.aTitle}">
+                <i class="${HypeTrack.DEFAULT_CONFIG.buttonIcon}"></i>
+                <span> ${HypeTrack.DEFAULT_CONFIG.buttonText}</span>
             </a>`
         );
         
@@ -98,7 +98,7 @@ class HypeMan {
          * Create an instance of the hypeButton before the close button
          * Removes existing instances first to avoid duplicates
          */
-        windowHeader.find('.hype-man').remove();
+        windowHeader.find('.hype-track').remove();
         windowCloseBtn.before(hypeButton);
     
         /**
@@ -118,7 +118,7 @@ class HypeMan {
             "track": track,
             "playlist": this.playlist
         }
-        new HMActorTrackForm(actor, data, options).render(true);
+        new HTActorTrackForm(actor, data, options).render(true);
     }
 
     _getPlaylistSound(trackId) {
@@ -136,7 +136,7 @@ class HypeMan {
 }
 
 
-class HMActorTrackForm extends FormApplication {
+class HTActorTrackForm extends FormApplication {
     constructor(actor, data, options){
         super(data, options);
         this.actor = actor;
@@ -149,9 +149,9 @@ class HMActorTrackForm extends FormApplication {
      */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            id: "hype-man-track",
+            id: "hype-track-form",
             title: "Character Theme Song",
-            template: "public/modules/hype-man/templates/actor-track-form.html",
+            template: "public/modules/hype-track/templates/hype-track-form.html",
             classes: ["sheet"],
             width: 500
         });
@@ -176,7 +176,7 @@ class HMActorTrackForm extends FormApplication {
      */
     async _updateObject(event, formData) {
         try {
-            this.actor.setFlag(HypeMan.DEFAULT_CONFIG.moduleName, HypeMan.DEFAULT_CONFIG.flagNames.track, formData.track);
+            this.actor.setFlag(HypeTrack.DEFAULT_CONFIG.moduleName, HypeTrack.DEFAULT_CONFIG.flagNames.track, formData.track);
         } catch (e) {
             throw e;   
         }
@@ -185,13 +185,5 @@ class HMActorTrackForm extends FormApplication {
 
 }
 
-const hypeMan = new HypeMan();
-hypeMan.init();
-
-//on combat turn change,
-//if the turn's actor has the flag set
-//play the song
-
-//on ready,
-//create the hype man playlist,
-//if one doesn't exist
+const hypeTrack = new HypeTrack();
+hypeTrack.init();

@@ -1,12 +1,12 @@
 {
-    "name": "hype-man",
-    "title": "Hype Man",
+    "name": "hype-track",
+    "title": "Hype Track",
     "description": "Plays a track for characters on their turn in combat",
     "version": "0.1",
     "author": "Evan Clarke [errational]",
-    "url": "https://github.com/death-save/hype-man",
-    "manifest": "https://raw.githubusercontent.com/death-save/hype-man/master/module.json",
-    "download": "https://github.com/death-save/hype-man/archive/master.zip",
-    "scripts": ["./hype-man.js"]
+    "url": "https://github.com/death-save/hype-track",
+    "manifest": "https://raw.githubusercontent.com/death-save/hype-track/master/module.json",
+    "download": "https://github.com/death-save/hype-track/archive/master.zip",
+    "scripts": ["./hype-track.js"]
   }
   
