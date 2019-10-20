@@ -5,6 +5,8 @@ class HypeTrack {
 
     async init() {
         Hooks.on("ready", async () => {
+            if(!game.user.isGM) return;
+
             const hypePlaylist = game.playlists.entities.find(p => p.name == HypeTrack.DEFAULT_CONFIG.playlistName);
             if(!hypePlaylist) {
                 this.playlist = await Playlist.create({"name": HypeTrack.DEFAULT_CONFIG.playlistName});
@@ -35,6 +37,7 @@ class HypeTrack {
      * Hooks on render of the default Actor sheet in order to insert the DDB Button
      */
     _hookOnRenderCharacterSheets() {
+        if(!game.user.isGM) return;
         const sheetClasses = Object.values(CONFIG.Actor.sheetClasses.character);
 
         for (let s of sheetClasses) {
