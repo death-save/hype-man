@@ -30,3 +30,10 @@ With Hype Track you can give your players that experience by setting a Hype Trac
 
  In the form that pops up, select the appropriate track from the Hype Tracks playlist    
  ![Hype Track Form](https://i.imgur.com/mMoixeJ.png)
+
+## Compatibility
+
+- [X] D&D 5e
+- [X] PF2e
+- [ ] WFRP4e
+- [ ] Simple/Others
