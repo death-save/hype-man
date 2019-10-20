@@ -4,9 +4,10 @@
         <label>Actor Theme Song</label>
         <select name="track" class="track-select" title="Track selection">
             {{#select track}}
-            {{#each playlistTracks}}
+                <option value=""></option>
+                {{#each playlistTracks}}
                 <option value="{{this.id}}">{{this.name}}</option>
-            {{/each}}
+                {{/each}}
             {{/select}}
         </select>
         <p class="hint">Select the audio file to use as this actor's theme song</p> 
