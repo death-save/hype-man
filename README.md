@@ -3,7 +3,7 @@
 [Installation](#Installation)    
 [Module Manifest](https://raw.githubusercontent.com/death-save/hype-track/master/module.json)
 
-![Demo](https://www.youtube.com/watch?v=OTOZFU8_COE)
+[![Demo](http://img.youtube.com/vi/OTOZFU8_COE/0.jpg)](https://www.youtube.com/watch?v=OTOZFU8_COE)
 
 Every hero needs a hype person* in their corner, getting the crowd amped up whenever they arrive.
 
